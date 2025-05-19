@@ -1,61 +1,69 @@
-# Welcome to React Router!
+# 🎉 Bem-vindo(a) ao Sistema de Gestão de Voluntários da COMQ!
 
-A modern, production-ready template for building full-stack React applications using React Router.
+Esta aplicação FullStack foi desenvolvida utilizando React Router V7 em framework mode, com o objetivo de auxiliar Líderes de Grupos de Trabalho e Voluntários na organização e controle das horas trabalhadas.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## 🚀 Tecnologias Utilizadas
 
-## Features
-
-- 🚀 Server-side rendering
+- 🌐 Server-side rendering
 - ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+- 📦 Asset bundling e otimização
+- 🔄 Carregamento e mutações de dados
+- 🔒 TypeScript por padrão
+- 🎨 TailwindCSS para estilização
+- 🔥 Firebase para autenticação e banco de dados
+- 📖 [Documentação do React Router](https://reactrouter.com/)
 
-## Getting Started
+---
 
-### Installation
+## ⚙️ Configuração do Projeto
 
-Install the dependencies:
+### 🛠️ Instalação
+
+Primeiro, instale as dependências do projeto:
 
 ```bash
 npm install
 ```
 
-### Development
+### ✅ Rodando o Projeto Localmente
 
-Start the development server with HMR:
+O banco de dados local será um simples arquivo `json`.
+
+1. Crie o arquivo `db.json` na pasta `app/.server/db/`. Esse arquivo não será versionado.
+2. Execute o comando abaixo na raiz do projeto:
 
 ```bash
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+A aplicação estará disponível em `http://localhost:5173`.
 
-## Building for Production
+---
 
-Create a production build:
+## 🚀 Build para Produção
+
+Para gerar a build de produção, execute:
 
 ```bash
 npm run build
 ```
 
-## Deployment
+---
+
+## 🚢 Deployment
 
 ### Docker Deployment
 
-To build and run using Docker:
+Para construir e rodar a aplicação usando Docker:
 
 ```bash
-docker build -t my-app .
+docker build -t comq-app .
 
-# Run the container
-docker run -p 3000:3000 my-app
+# Execute o container
+docker run -p 3000:3000 comq-app
 ```
 
-The containerized application can be deployed to any platform that supports Docker, including:
+A aplicação containerizada pode ser implantada em qualquer plataforma que suporte Docker, incluindo:
 
 - AWS ECS
 - Google Cloud Run
@@ -64,24 +72,30 @@ The containerized application can be deployed to any platform that supports Dock
 - Fly.io
 - Railway
 
-### DIY Deployment
+---
 
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
+### Deployment DIY (Faça Você Mesmo)
 
-Make sure to deploy the output of `npm run build`
+Se você já tem experiência com o deploy de aplicações Node.js, o servidor embutido está pronto para produção.
+
+Certifique-se de enviar a pasta `build/` gerada pelo comando `npm run build`:
 
 ```
 ├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
+├── package-lock.json (ou pnpm-lock.yaml, ou bun.lockb)
 ├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
+│   ├── client/    # Arquivos estáticos
+│   └── server/    # Código do servidor
 ```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
 
 ---
 
-Built with ❤️ using React Router.
+## 🎨 Estilização
+
+Este projeto já vem configurado com o [Tailwind CSS](https://tailwindcss.com/), mas você pode optar por qualquer framework CSS que preferir.
+
+---
+
+Construído com ❤️ usando React Router e Firebase. 💻🚀👍
+
+---

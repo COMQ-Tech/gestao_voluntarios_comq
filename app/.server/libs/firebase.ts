@@ -9,7 +9,7 @@ if (!admin.apps.length) {
   });
 }
 
-export class FirebaseDataAccessor<T extends { id: string }>
+export class FirebaseRepositoryImpl<T extends { id: string }>
   implements IRepository<T>
 {
   private collection: FirebaseFirestore.CollectionReference<T>;

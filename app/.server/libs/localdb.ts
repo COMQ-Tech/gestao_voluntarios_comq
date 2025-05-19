@@ -4,7 +4,7 @@ import type { CollectionName, IRepository } from "../base-repository";
 type Data = typeof data;
 type FakeDBCollectionName = keyof Data;
 
-export class FakeDBDataAccessor<T extends { id: string }>
+export class LocalDBRepositoryImpl<T extends { id: string }>
   implements IRepository<T>
 {
   private collection: T[];

@@ -1,9 +1,3 @@
-const useFakeDB = process.env.USE_FAKE_DB === "true";
-
-if (useFakeDB) {
-  console.log("Using FakeDB");
-}
-
 export interface IRepository<T extends { id: string }> {
   getAll(): Promise<T[]>;
   getById(id: string): Promise<T | null>;
@@ -12,6 +6,8 @@ export interface IRepository<T extends { id: string }> {
   delete(id: string): Promise<void>;
 }
 
+const currentEnv = process.env.ENV;
+
 export type CollectionName = "notes" | "users";
 
 type BaseRepositoryClass = new <T extends { id: string }>(
@@ -19,13 +15,14 @@ type BaseRepositoryClass = new <T extends { id: string }>(
 ) => IRepository<T>;
 
 async function loadBaseRepositoryClass(): Promise<BaseRepositoryClass> {
-  if (useFakeDB) {
-    const { FakeDBDataAccessor } = await import("./libs/fake-db-acessor");
-    return FakeDBDataAccessor;
+  if (currentEnv === "local") {
+    console.log("Using LocalDB");
+    const { LocalDBRepositoryImpl } = await import("./libs/localdb");
+    return LocalDBRepositoryImpl;
   }
 
-  const { FirebaseDataAccessor } = await import("./libs/firebase");
-  return FirebaseDataAccessor;
+  const { FirebaseRepositoryImpl } = await import("./libs/firebase");
+  return FirebaseRepositoryImpl;
 }
 
 export const BaseRepository = await loadBaseRepositoryClass();
