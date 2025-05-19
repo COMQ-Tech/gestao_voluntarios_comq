@@ -4,6 +4,7 @@ Esta aplicação FullStack foi desenvolvida utilizando React Router V7 em framew
 
 ## 🚀 Tecnologias Utilizadas
 
+- 🟢 Node v20+
 - 🌐 Server-side rendering
 - ⚡️ Hot Module Replacement (HMR)
 - 📦 Asset bundling e otimização
