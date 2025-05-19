@@ -1,13 +1,10 @@
 import type { Route } from "./+types/home";
 import { Welcome } from "../welcome/welcome";
 import { useLoaderData, type LoaderFunction } from "react-router";
-import { firestore } from "~/libs/firebase.server";
-
-type Note = {
-  id: string;
-  title: string;
-  content: string;
-};
+import {
+  NotesRepository,
+  type Note,
+} from "~/.server/repositories/notes-repository";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -17,13 +14,7 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export const loader: LoaderFunction = async () => {
-  const snapshot = await firestore.collection("notes").get();
-  const notes: Note[] = snapshot.docs.map(
-    (doc: { id: string; data: () => {} }) => ({
-      id: doc.id,
-      ...(doc.data() as Omit<Note, "id">),
-    })
-  );
+  const notes: Note[] = await NotesRepository.getAll();
 
   return notes;
 };
