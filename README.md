@@ -1,20 +1,33 @@
 # 🎉 Bem-vindo(a) ao Sistema de Gestão de Voluntários da COMQ!
 
-Esta aplicação FullStack foi desenvolvida utilizando React Router V7 em framework mode, com o objetivo de auxiliar Líderes de Grupos de Trabalho e Voluntários na organização e controle das horas trabalhadas.
+## 🗂️ Visão Geral do Projeto
 
-## 🚀 Tecnologias Utilizadas
+Este é um **Sistema de Gestão de Voluntários desenvolvido** em React **Router V7 (framework mode)**, **TypeScript**, **TailwindCSS** e **Firebase**. O objetivo é ajudar líderes e voluntários a organizar e controlar as horas de trabalho.
+<br />
+<br />
 
-- 🟢 Node v20+
-- 🌐 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling e otimização
-- 🔄 Carregamento e mutações de dados
-- 🔒 TypeScript por padrão
-- 🎨 TailwindCSS para estilização
-- 🔥 Firebase para autenticação e banco de dados
-- 📖 [Documentação do React Router](https://reactrouter.com/)
+## 🏗️ Principais Componentes & Arquitetura
 
----
+- **Frontend:**
+
+  - Feito com React + TypeScript
+  - Utiliza React Router V7 para navegação.
+  - Estilização com TailwindCSS.
+
+- **Backend:**
+
+  - Utiliza Firebase para autenticação e banco de dados em produção.
+  - Em desenvolvimento, usa um arquivo `db.json` local para simular o banco.
+
+- **Renderização:**
+
+  - Suporte a Server-side Rendering (SSR) para melhor performance.
+
+- **Build & Deploy:**
+
+Scripts prontos para build (npm run build) e deploy via Docker.
+<br />
+<br />
 
 ## ⚙️ Configuração do Projeto
 
@@ -38,8 +51,8 @@ npm run dev
 ```
 
 A aplicação estará disponível em `http://localhost:5173`.
-
----
+<br />
+<br />
 
 ## 🚀 Build para Produção
 
@@ -49,7 +62,7 @@ Para gerar a build de produção, execute:
 npm run build
 ```
 
----
+<br /><br />
 
 ## 🚢 Deployment
 
@@ -73,30 +86,29 @@ A aplicação containerizada pode ser implantada em qualquer plataforma que supo
 - Fly.io
 - Railway
 
----
+<br /><br />
 
-### Deployment DIY (Faça Você Mesmo)
+## 📝 Convenções e Boas Práticas
 
-Se você já tem experiência com o deploy de aplicações Node.js, o servidor embutido está pronto para produção.
+### TypeScript
 
-Certifique-se de enviar a pasta `build/` gerada pelo comando `npm run build`:
+- Sempre utilize **tipos** e **interfaces** para garantir segurança e clareza no código.
 
-```
-├── package.json
-├── package-lock.json (ou pnpm-lock.yaml, ou bun.lockb)
-├── build/
-│   ├── client/    # Arquivos estáticos
-│   └── server/    # Código do servidor
-```
+### Organização
 
----
+- Separe **componentes**, **rotas** e **lógica de servidor** em pastas distintas.
+- Use nomes **claros** e **descritivos** para arquivos, funções e variáveis.
 
-## 🎨 Estilização
+### Estilização
 
-Este projeto já vem configurado com o [Tailwind CSS](https://tailwindcss.com/), mas você pode optar por qualquer framework CSS que preferir.
+- Prefira **classes utilitárias** do TailwindCSS.
+- Evite **estilos inline**.
+
+### Controle de Versão
+
+- **Não versionar** arquivos sensíveis ou de dados locais (`db.json`, `.env`).
+  <br /><br />
 
 ---
 
 Construído com ❤️ usando React Router e Firebase. 💻🚀👍
-
----
