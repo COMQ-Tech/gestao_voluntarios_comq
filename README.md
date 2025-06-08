@@ -41,18 +41,52 @@ npm install
 
 ### ✅ Rodando o Projeto Localmente
 
-O banco de dados local será um simples arquivo `json`.
-
-1. Crie o arquivo `db.json` na pasta `app/.server/db/`. Esse arquivo não será versionado.
-2. Execute o comando abaixo na raiz do projeto:
+#### Desenvolvimento Básico
 
 ```bash
 npm run dev
 ```
 
-A aplicação estará disponível em `http://localhost:5173`.
+#### Ambientes Específicos
+
+Para diferentes ambientes de desenvolvimento:
+
+```bash
+# Ambiente local
+npm run dev:local
+
+# Ambiente de staging
+npm run dev:staging
+```
+
+> **Nota para usuários Windows**: Se você encontrar problemas com os comandos de ambiente, instale o `cross-env`:
+>
+> ```bash
+> npm install --save-dev cross-env
+> ```
+>
+> E atualize os scripts no `package.json` para usar `cross-env ENV=local` ao invés de `env ENV=local`.
+
+### 📁 Configuração do Banco Local
+
+1. Crie o arquivo `db.json` na pasta `app/.server/db/`. Esse arquivo não será versionado.
+2. A aplicação estará disponível em `http://localhost:5173`.
+
 <br />
 <br />
+
+## 🚀 Scripts Disponíveis
+
+| Script                | Descrição                            |
+| --------------------- | ------------------------------------ |
+| `npm run dev`         | Inicia o servidor de desenvolvimento |
+| `npm run dev:local`   | Inicia com ENV=local                 |
+| `npm run dev:staging` | Inicia com ENV=staging               |
+| `npm run build`       | Gera build de produção               |
+| `npm run start`       | Inicia o servidor de produção        |
+| `npm run typecheck`   | Verifica tipos TypeScript            |
+
+<br /><br />
 
 ## 🚀 Build para Produção
 
@@ -60,6 +94,12 @@ Para gerar a build de produção, execute:
 
 ```bash
 npm run build
+```
+
+Para iniciar o servidor de produção:
+
+```bash
+npm run start
 ```
 
 <br /><br />
@@ -88,6 +128,28 @@ A aplicação containerizada pode ser implantada em qualquer plataforma que supo
 
 <br /><br />
 
+## 🛠️ Tecnologias Utilizadas
+
+### Frontend
+
+- **React** (^19.1.0) - Biblioteca de interface
+- **React Router** (^7.5.3) - Roteamento e framework
+- **TypeScript** (^5.8.3) - Tipagem estática
+- **TailwindCSS** (^4.1.4) - Framework CSS
+
+### Backend
+
+- **Firebase** (^11.7.1) - Banco de dados e autenticação
+- **Firebase Admin** (^13.3.0) - SDK administrativo
+- **Node.js** - Runtime do servidor
+
+### Build & Dev Tools
+
+- **Vite** (^6.3.3) - Bundler e dev server
+- **@react-router/dev** - Ferramentas de desenvolvimento
+
+<br /><br />
+
 ## 📝 Convenções e Boas Práticas
 
 ### TypeScript
@@ -107,7 +169,35 @@ A aplicação containerizada pode ser implantada em qualquer plataforma que supo
 ### Controle de Versão
 
 - **Não versionar** arquivos sensíveis ou de dados locais (`db.json`, `.env`).
-  <br /><br />
+
+<br /><br />
+
+## 🔧 Solução de Problemas
+
+### Problemas com Variáveis de Ambiente (Windows)
+
+Se você estiver no Windows e encontrar problemas com os scripts `dev:local` ou `dev:staging`, instale o `cross-env`:
+
+```bash
+npm install --save-dev cross-env
+```
+
+Depois atualize os scripts no `package.json`:
+
+```json
+{
+  "scripts": {
+    "dev:local": "cross-env ENV=local react-router dev",
+    "dev:staging": "cross-env ENV=staging react-router dev"
+  }
+}
+```
+
+### Problemas de Porta
+
+Se a porta 5173 estiver ocupada, o Vite automaticamente tentará usar a próxima porta disponível.
+
+<br /><br />
 
 ---
 
