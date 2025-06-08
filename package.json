@@ -6,7 +6,9 @@
     "build": "react-router build",
     "dev": "react-router dev",
     "dev:local": "env ENV=local react-router dev",
+    "dev:local:win": "set ENV=local && react-router dev",
     "dev:staging": "env ENV=staging react-router dev",
+    "dev:staging:win": "set ENV=staging react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc"
   },
