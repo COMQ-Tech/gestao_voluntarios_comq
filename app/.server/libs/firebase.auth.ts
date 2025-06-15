@@ -1,0 +1,67 @@
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  type Auth as FirebaseAuth,
+  type AuthError,
+  signOut,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from "firebase/auth";
+import { getApp } from "firebase/app";
+import type { IAuthentication } from "../base-authentication";
+
+export class FirebaseAuthenticationImpl implements IAuthentication {
+  private auth: FirebaseAuth;
+
+  constructor() {
+    this.auth = getAuth(getApp());
+  }
+
+  async login(
+    email: string,
+    password: string
+  ): Promise<{ success: boolean; error?: string }> {
+    try {
+      await signInWithEmailAndPassword(this.auth, email, password);
+      return { success: true };
+    } catch (error: unknown | AuthError) {
+      return { success: false, error: (error as AuthError).message };
+    }
+  }
+
+  async logout(): Promise<void> {
+    await signOut(this.auth);
+  }
+
+  async isAuthenticated(): Promise<boolean> {
+    return !!this.auth.currentUser;
+  }
+
+  async getUser(): Promise<{ id: string; email: string } | null> {
+    const user = this.auth.currentUser;
+    return user ? { id: user.uid, email: user.email || "" } : null;
+  }
+
+  async register(
+    email: string,
+    password: string
+  ): Promise<{ success: boolean; error?: string }> {
+    try {
+      await createUserWithEmailAndPassword(this.auth, email, password);
+      return { success: true };
+    } catch (error: unknown | AuthError) {
+      return { success: false, error: (error as AuthError).message };
+    }
+  }
+
+  async resetPassword(
+    email: string
+  ): Promise<{ success: boolean; error?: string }> {
+    try {
+      await sendPasswordResetEmail(this.auth, email);
+      return { success: true };
+    } catch (error: unknown | AuthError) {
+      return { success: false, error: (error as AuthError).message };
+    }
+  }
+}
