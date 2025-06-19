@@ -22,7 +22,13 @@ export class FirebaseAuthenticationImpl implements IAuthentication {
     password: string
   ): Promise<{ success: boolean; error?: string }> {
     try {
-      await signInWithEmailAndPassword(this.auth, email, password);
+      const response = await signInWithEmailAndPassword(
+        this.auth,
+        email,
+        password
+      );
+
+      console.log("login success", response);
       return { success: true };
     } catch (error: unknown | AuthError) {
       return { success: false, error: (error as AuthError).message };

@@ -1,7 +1,6 @@
 import { Form, useActionData, useNavigation } from "react-router";
 import type { Route } from "./+types/login";
-import { getUser, createUserSession } from "~/utils/session.server";
-import { redirect } from "react-router";
+import { loginWithEmailAndPassword } from "~/.server/session";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -15,11 +14,7 @@ export function meta({}: Route.MetaArgs) {
 
 // Redirect if already logged in
 export async function loader({ request }: Route.LoaderArgs) {
-  const user = await getUser(request);
-  if (user) {
-    throw redirect("/");
-  }
-  return { user };
+  return { user: null };
 }
 
 // Handle login form submission
@@ -28,8 +23,11 @@ export async function action({ request }: Route.ActionArgs) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
-  // TODO: Implement login logic
-  return null;
+  try {
+    return await loginWithEmailAndPassword(email, password);
+  } catch (error) {
+    return { error: "Erro ao fazer login" };
+  }
 }
 
 export default function Login() {
@@ -148,14 +146,6 @@ export default function Login() {
                   "Entrar"
                 )}
               </button>
-            </div>
-
-            <div className="text-center">
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                {process.env.ENV === "local"
-                  ? "Ambiente local: use qualquer email e senha com 6+ caracteres"
-                  : "Use suas credenciais Firebase"}
-              </p>
             </div>
           </Form>
         </div>
