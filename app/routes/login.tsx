@@ -1,6 +1,6 @@
-import { Form, useActionData, useNavigation } from "react-router";
+import { Form, redirect, useActionData, useNavigation } from "react-router";
 import type { Route } from "./+types/login";
-import { loginWithEmailAndPassword } from "~/.server/session";
+import { getUser, loginWithEmailAndPassword } from "~/.server/session";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -14,6 +14,13 @@ export function meta({}: Route.MetaArgs) {
 
 // Redirect if already logged in
 export async function loader({ request }: Route.LoaderArgs) {
+  const user = await getUser(request);
+
+  if (user) {
+    console.log("user already logged in, redirecting to /");
+    return redirect("/");
+  }
+
   return { user: null };
 }
 
