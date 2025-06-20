@@ -22,5 +22,5 @@ export const loader: LoaderFunction = async () => {
 export default function Home() {
   const notes = useLoaderData<Note[]>();
   console.log("Notes from Firestore:", notes);
-  return <Welcome />;
+  return <div>Home</div>;
 }
