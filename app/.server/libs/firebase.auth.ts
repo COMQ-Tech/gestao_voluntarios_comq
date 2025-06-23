@@ -9,12 +9,13 @@ import {
 } from "firebase/auth";
 import { getApp } from "firebase/app";
 import type { IAuthentication } from "../base-authentication";
+import { FirebaseApplication } from "./firebase";
 
 export class FirebaseAuthenticationImpl implements IAuthentication {
   private auth: FirebaseAuth;
 
   constructor() {
-    this.auth = getAuth(getApp());
+    this.auth = getAuth(FirebaseApplication);
   }
 
   async login(
