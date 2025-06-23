@@ -24,7 +24,10 @@ export default function ProtectedLayout() {
         </Form>
       </nav>
       <main>
-        <Outlet />
+        <div>sidebar</div>
+        <div>
+          <Outlet />
+        </div>
       </main>
     </div>
   );
