@@ -21,7 +21,7 @@ async function loadBaseRepositoryClass(): Promise<BaseRepositoryClass> {
     return LocalDBRepositoryImpl;
   }
 
-  const { FirebaseRepositoryImpl } = await import("./libs/firebase");
+  const { FirebaseRepositoryImpl } = await import("./libs/firebase.repository");
   return FirebaseRepositoryImpl;
 }
 

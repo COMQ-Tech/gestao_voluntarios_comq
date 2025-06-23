@@ -10,3 +10,6 @@
 
 # Local db
 **db.json
+
+# Ignora pasta /tasks criada pelo cursor
+/tasks/*
