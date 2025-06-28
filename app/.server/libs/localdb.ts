@@ -1,5 +1,11 @@
-import data from "../db/db.json";
-import type { CollectionName, IRepository } from "../base-repository";
+let data: any;
+try {
+  data = require("../db/db.json");
+} catch (error) {
+  data = {};
+}
+
+import type { CollectionName, IRepository } from "../repository-factory";
 
 type Data = typeof data;
 type FakeDBCollectionName = keyof Data;

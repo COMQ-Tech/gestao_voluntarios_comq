@@ -1,5 +1,5 @@
 import admin from "firebase-admin";
-import type { IRepository } from "../base-repository";
+import type { IRepository } from "../repository-factory";
 
 const firebaseAdminConfig = JSON.parse(process.env.FIREBASE_ADMIN_CONFIG!);
 
