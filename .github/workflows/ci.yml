@@ -1,0 +1,33 @@
+name: Integração Contínua
+
+on:
+  pull_request:
+    branches: [main, feature/*]
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Rodar build
+        run: npm run build
+
+      # - name: Rodar testes
+      #   run: |
+      #     if [ -f package.json ] && grep -q 'test' package.json; then
+      #       npm test
+      #     else
+      #       echo "Sem testes definidos";
+      #     fi
