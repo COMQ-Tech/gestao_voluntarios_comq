@@ -1,0 +1,21 @@
+name: (Staging) Deploy to Render
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Staging Deployment
+        uses: sws2apps/render-deployment@v1.8.0
+        with:
+          serviceId: ${{ secrets.RENDER_SERVICE_ID_STAGING }}
+          apiKey: ${{ secrets.RENDER_API_KEY_STAGING }} # optional, set this secret in your repo if needed
+          multipleDeployment: true # optional, default is true
