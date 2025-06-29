@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: gestao-voluntatios-comq
+    env: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm start
+    rootDir: .
+    autoDeploy: false
