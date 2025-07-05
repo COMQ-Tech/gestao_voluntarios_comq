@@ -1,4 +1,4 @@
-import type { IAuthentication } from "../base-authentication";
+import type { IAuthentication } from "../authentication";
 
 export class LocalDBAuthenticationImpl implements IAuthentication {
   private users: Map<string, { id: string; email: string; password: string }>;

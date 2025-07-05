@@ -1,3 +1,6 @@
+import { LocalDBAuthenticationImpl } from "./libs/local.auth";
+import { FirebaseAuthenticationImpl } from "./libs/firebase.auth";
+
 export interface IAuthentication {
   login(
     email: string,
@@ -13,19 +16,15 @@ export interface IAuthentication {
   resetPassword(email: string): Promise<{ success: boolean; error?: string }>;
 }
 
-type AuthenticationConstructor = new () => IAuthentication;
-async function loadAuthenticationClass(): Promise<AuthenticationConstructor> {
-  const currentEnv = process.env.ENV;
+const currentEnv = process.env.ENV;
 
+export function createAuthenticator() {
   if (currentEnv === "local") {
     console.log("Using LocalDB for authentication");
-    const { LocalDBAuthenticationImpl } = await import("./libs/local.auth");
-    return LocalDBAuthenticationImpl;
+    return new LocalDBAuthenticationImpl();
   }
 
-  const { FirebaseAuthenticationImpl } = await import("./libs/firebase.auth");
-  return FirebaseAuthenticationImpl;
+  return new FirebaseAuthenticationImpl();
 }
-export const Authentication = await loadAuthenticationClass();
 
-export const authentication = new Authentication();
+export const Authentication = createAuthenticator();

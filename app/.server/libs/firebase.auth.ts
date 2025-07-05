@@ -8,7 +8,7 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { getApp } from "firebase/app";
-import type { IAuthentication } from "../base-authentication";
+import type { IAuthentication } from "../authentication";
 import { FirebaseApplication } from "./firebase";
 
 export class FirebaseAuthenticationImpl implements IAuthentication {

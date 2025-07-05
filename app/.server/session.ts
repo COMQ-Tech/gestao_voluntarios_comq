@@ -1,5 +1,5 @@
 import { createCookieSessionStorage, redirect } from "react-router";
-import { authentication } from "./base-authentication";
+import { Authentication } from "./authentication";
 
 // Cookie configuration
 const sessionStorage = createCookieSessionStorage({
@@ -32,21 +32,21 @@ export async function getUserSession(request: Request) {
 
   if (!userId) return null;
 
-  return await authentication.getUser();
+  return await Authentication.getUser();
 }
 
 export async function loginWithEmailAndPassword(
   email: string,
   password: string
 ) {
-  const result = await authentication.login(email, password);
+  const result = await Authentication.login(email, password);
 
   if (!result.success) {
     return { error: result.error, email };
   }
 
   // Get user info after successful login
-  const user = await authentication.getUser();
+  const user = await Authentication.getUser();
   if (!user) {
     return { error: "Failed to get user information" };
   }
@@ -60,7 +60,7 @@ export async function logout(request: Request) {
     request.headers.get("Cookie")
   );
 
-  await authentication.logout();
+  await Authentication.logout();
 
   return redirect("/login", {
     headers: {
