@@ -1,4 +1,4 @@
-import { FirebaseRepositoryImpl } from "./libs/firebase";
+import { FirebaseRepositoryImpl } from "./libs/firebase.repository";
 import { LocalDBRepositoryImpl } from "./libs/localdb";
 
 export interface IRepository<T extends { id: string }> {
