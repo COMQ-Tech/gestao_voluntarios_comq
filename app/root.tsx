@@ -10,7 +10,7 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import { getUser } from "~/.server/session";
+import { getUserSession } from "~/.server/session";
 // import { Header } from "./components/Header";
 
 export const links: Route.LinksFunction = () => [
@@ -27,7 +27,7 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const user = await getUser(request);
+  const user = await getUserSession(request);
   return { user };
 }
 

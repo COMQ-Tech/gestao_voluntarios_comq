@@ -1,9 +1,9 @@
 import type { LoaderFunctionArgs } from "react-router";
 import { Form, Outlet, redirect, useLoaderData } from "react-router";
-import { getUser } from "~/.server/session";
+import { getUserSession } from "~/.server/session";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const user = await getUser(request);
+  const user = await getUserSession(request);
 
   if (!user) {
     return redirect("/login");

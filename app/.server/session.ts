@@ -24,7 +24,7 @@ export async function createUserSession(userId: string, redirectTo: string) {
   });
 }
 
-export async function getUser(request: Request) {
+export async function getUserSession(request: Request) {
   const session = await sessionStorage.getSession(
     request.headers.get("Cookie")
   );
