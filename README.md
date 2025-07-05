@@ -41,31 +41,27 @@ npm install
 
 ### ✅ Rodando o Projeto Localmente
 
-#### Desenvolvimento Básico
-
-```bash
-npm run dev
-```
-
 #### Ambientes Específicos
 
 Para diferentes ambientes de desenvolvimento:
 
 ```bash
-# Ambiente local
+# Ambiente local (utiliza o arquivo db.json como banco de dados local)
 npm run dev:local
 
-# Ambiente de staging
+# Ambiente de staging (utiliza variáveis de ambiente definidas no arquivo .env)
 npm run dev:staging
 ```
 
-> **Nota para usuários Windows**: Se você encontrar problemas com os comandos de ambiente, instale o `cross-env`:
+> **Nota para usuários Windows**: Se você encontrar problemas com os comandos de ambiente, utilize os comandos abaixo:
 >
 > ```bash
-> npm install --save-dev cross-env
-> ```
+> # Ambiente local
+> npm run dev:local:win
 >
-> E atualize os scripts no `package.json` para usar `cross-env ENV=local` ao invés de `env ENV=local`.
+> # Ambiente de staging
+> npm run dev:staging:win
+> ```
 
 ### 📁 Configuração do Banco Local
 
@@ -74,19 +70,6 @@ npm run dev:staging
 
 <br />
 <br />
-
-## 🚀 Scripts Disponíveis
-
-| Script                | Descrição                            |
-| --------------------- | ------------------------------------ |
-| `npm run dev`         | Inicia o servidor de desenvolvimento |
-| `npm run dev:local`   | Inicia com ENV=local                 |
-| `npm run dev:staging` | Inicia com ENV=staging               |
-| `npm run build`       | Gera build de produção               |
-| `npm run start`       | Inicia o servidor de produção        |
-| `npm run typecheck`   | Verifica tipos TypeScript            |
-
-<br /><br />
 
 ## 🚀 Build para Produção
 
@@ -116,15 +99,6 @@ docker build -t comq-app .
 # Execute o container
 docker run -p 3000:3000 comq-app
 ```
-
-A aplicação containerizada pode ser implantada em qualquer plataforma que suporte Docker, incluindo:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
 
 <br /><br />
 

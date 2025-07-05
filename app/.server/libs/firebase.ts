@@ -1,6 +1,5 @@
 import admin from "firebase-admin";
-import { initializeApp as adminInitializeApp } from "firebase-admin/app";
-import { initializeApp, getApps } from "firebase/app";
+import type { IRepository } from "../repository-factory";
 
 const firebaseAdminConfig = JSON.parse(process.env.FIREBASE_ADMIN_CONFIG!);
 const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG!);
