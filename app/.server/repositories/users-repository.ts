@@ -1,4 +1,4 @@
-import { BaseRepository } from "../base-repository";
+import { createRepository } from "../repository-factory";
 
 export type User = {
   id: string;
@@ -15,4 +15,4 @@ export type UserUpdate = Partial<Omit<User, "id">>;
 
 // Repository for managing user data in the database
 // This is separate from Firebase Auth - it stores additional user profile information
-export const UsersRepository = new BaseRepository<User>("users");
+export const UsersRepository = createRepository<User>("users");
