@@ -1,50 +1,20 @@
 import admin from "firebase-admin";
-import type { IRepository } from "../repository-factory";
+import { initializeApp as adminInitializeApp } from "firebase-admin/app";
+import { initializeApp, getApps } from "firebase/app";
 
 const firebaseAdminConfig = JSON.parse(process.env.FIREBASE_ADMIN_CONFIG!);
+const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG!);
 
 if (!admin.apps.length) {
-  admin.initializeApp({
+  adminInitializeApp({
     credential: admin.credential.cert(firebaseAdminConfig),
   });
 }
 
-export class FirebaseRepositoryImpl<T extends { id: string }>
-  implements IRepository<T>
-{
-  private collection: FirebaseFirestore.CollectionReference<T>;
+export const Firebase = !getApps()?.length
+  ? initializeApp(firebaseConfig)
+  : getApps()[0];
 
-  constructor(collectionName: string) {
-    const firestore = admin.firestore();
-    this.collection = firestore.collection(
-      collectionName
-    ) as FirebaseFirestore.CollectionReference<T>;
-  }
-
-  async getAll(): Promise<T[]> {
-    const snapshot = await this.collection.get();
-    return snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id } as T));
-  }
-
-  async getById(id: string): Promise<T | null> {
-    const doc = await this.collection.doc(id).get();
-    return doc.exists ? ({ id: doc.id, ...doc.data() } as T) : null;
-  }
-
-  async create(data: T): Promise<T> {
-    const docRef = await this.collection.add(data);
-    const doc = await docRef.get();
-    return { id: doc.id, ...doc.data() } as T;
-  }
-
-  async update(id: string, data: Partial<T>): Promise<T | null> {
-    const docRef = this.collection.doc(id);
-    await docRef.update(data);
-    const doc = await docRef.get();
-    return doc.exists ? ({ id: doc.id, ...doc.data() } as T) : null;
-  }
-
-  async delete(id: string): Promise<void> {
-    await this.collection.doc(id).delete();
-  }
-}
+export const Firestore = admin.firestore();
+export const FirebaseAdmin = admin;
+export const FirebaseApplication = Firebase;
