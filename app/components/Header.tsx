@@ -88,25 +88,6 @@ export const Header = ({ user }: HeaderProps) => {
                 </svg>
               )}
             </button>
-
-            {/* <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center">
-                <span className="text-white text-sm font-medium">
-                  {user.email?.charAt(0).toUpperCase()}
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-sm text-gray-700 dark:text-gray-300">
-                  {user.displayName || user.email}
-                </span>
-                {user.role && (
-                  <span className="text-xs text-gray-500 dark:text-gray-400 capitalize">
-                    {user.role}
-                  </span>
-                )}
-              </div>
-
-            </div> */}
             <UserDropdown user={user}/>
             <Form method="post" action="/logout">
               <button
