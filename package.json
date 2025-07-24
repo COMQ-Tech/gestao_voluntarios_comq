@@ -10,7 +10,8 @@
     "dev:staging": "env ENV=staging react-router dev",
     "dev:staging:win": "set ENV=staging react-router dev",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc",
+    "seed:admin": "tsx app/.server/seeds/seed-admin-user.ts"
   },
   "dependencies": {
     "@react-router/node": "^7.5.3",
@@ -29,8 +30,10 @@
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "tailwindcss": "^4.1.4",
+    "tsx": "^4.20.3",
     "typescript": "^5.8.3",
     "vite": "^6.3.3",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "dotenv": "^17.0.1"
   }
 }

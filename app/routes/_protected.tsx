@@ -1,11 +1,22 @@
 import type { LoaderFunctionArgs } from "react-router";
 import { Outlet, redirect, useLoaderData } from "react-router";
 import { getUserSession } from "~/.server/session";
-import { Header } from "~/components/Header"; // usa seu componente estilizado!
-
+import { Header } from "~/components/Header"; 
+import type { User } from "~/.server/repositories/users-repository";
 export async function loader({ request }: LoaderFunctionArgs) {
-  const user = await getUserSession(request);
-  if (!user) return redirect("/login");
+  const sessionUser = await getUserSession(request);
+  if (!sessionUser) return redirect("/login");
+
+  const user: User = {
+    id: sessionUser.id,
+    email: sessionUser.email,
+    displayName: "Teste",
+    photoURL: undefined,
+    createdAt: new Date().toISOString(),
+    lastLoginAt: undefined,
+    role: "volunteer", 
+  };
+
   return { user };
 }
 

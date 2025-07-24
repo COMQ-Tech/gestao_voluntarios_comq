@@ -1,12 +1,8 @@
 import { useState } from "react";
 import { Form } from "react-router";
-
+import type { User } from "~/.server/repositories/users-repository";
 interface UserDropdownProps {
-  user: {
-    email?: string;
-    displayName?: string;
-    role?: string;
-  } | null;
+  user: User;
 }
 export function UserDropdown({ user }: UserDropdownProps) {
   const [open, setOpen] = useState(false);

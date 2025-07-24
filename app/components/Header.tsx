@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Form } from "react-router";
-import { UserDropdown } from "./Dropdown";
+import { UserDropdown } from "./UserDropdown";
+import type { User } from "~/.server/repositories/users-repository";
 
 interface HeaderProps {
-  user: {
-    email?: string;
-    displayName?: string;
-    role?: string;
-  } | null;
+  user: User; 
 }
-
 export const Header = ({ user }: HeaderProps) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
