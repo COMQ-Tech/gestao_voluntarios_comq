@@ -30,22 +30,10 @@ export async function loader({ request }: Route.LoaderArgs) {
 
 // Handle login form submission
 export async function action({ request }: Route.ActionArgs) {
-  console.log("Handling login action");
   try {
-    console.log("Parsing form data");
-    // Parse form data
     const formData = await request.formData();
-    console.log("Form data parsed successfully");
-    // Extract email and password
-    console.log("Extracting email and password from form data");
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-    console.log(
-      "Email:",
-      email,
-      "Password:",
-      password ? "******" : "not provided"
-    );
 
     return await loginWithEmailAndPassword(email, password);
   } catch (error) {
