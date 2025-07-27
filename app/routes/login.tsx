@@ -141,11 +141,14 @@ export default function Login() {
                 <img
                   src="/logo-bg-login.png"
                   alt="Image"
-                  className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+                  className="absolute inset-0 h-full w-full object-cover"
                 />
               </div>
             </CardContent>
           </Card>
+          <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
+            Construído com ❤️ para a COMQ
+          </div>
         </div>
       </div>
     </div>
