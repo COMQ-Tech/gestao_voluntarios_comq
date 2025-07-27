@@ -1,10 +1,9 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
 import { useLoaderData, type LoaderFunction } from "react-router";
 import {
   NotesRepository,
   type Note,
-} from "~/.server/repositories/notes-repository";
+} from "@/.server/repositories/notes-repository";
 
 export function meta({}: Route.MetaArgs) {
   return [

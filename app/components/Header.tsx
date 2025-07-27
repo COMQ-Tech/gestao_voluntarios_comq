@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Form } from "react-router";
 import { UserDropdown } from "./UserDropdown";
-import type { User } from "~/.server/repositories/users-repository";
+import type { User } from "@/.server/repositories/users-repository";
 
 interface HeaderProps {
-  user: User; 
+  user: User;
 }
 export const Header = ({ user }: HeaderProps) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -39,7 +39,11 @@ export const Header = ({ user }: HeaderProps) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center space-x-4">
-            <img src={isDarkMode ? "/logo-dark.png" : "/logo-full.png"} alt="Logo COMQ" className="h-10 w-auto cursor-pointer" />
+            <img
+              src={isDarkMode ? "/logo-dark.png" : "/logo-full.png"}
+              alt="Logo COMQ"
+              className="h-10 w-auto cursor-pointer"
+            />
             <h1 className="text-xl font-semibold text-gray-900 dark:text-white">
               COMQ - Gestão de Voluntários
             </h1>
@@ -50,7 +54,9 @@ export const Header = ({ user }: HeaderProps) => {
               onClick={toggleDarkMode}
               aria-label="Alternar modo escuro"
               className="p-2 cursor-pointer rounded-md bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition"
-              title={isDarkMode ? "Desativar modo escuro" : "Ativar modo escuro"}
+              title={
+                isDarkMode ? "Desativar modo escuro" : "Ativar modo escuro"
+              }
             >
               {isDarkMode ? (
                 <svg
@@ -84,7 +90,7 @@ export const Header = ({ user }: HeaderProps) => {
                 </svg>
               )}
             </button>
-            <UserDropdown user={user}/>
+            <UserDropdown user={user} />
             <Form method="post" action="/logout">
               <button
                 type="submit"

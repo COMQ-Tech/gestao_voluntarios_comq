@@ -1,4 +1,4 @@
-import { ReusableExample } from "~/components/ReusableExample";
+import { ReusableExample } from "@/components/ReusableExample";
 import { NoteTitle } from "./components/NoteTitle";
 
 export default function Notes() {
