@@ -37,12 +37,6 @@ export async function action({ request }: Route.ActionArgs) {
 
     return await loginWithEmailAndPassword(email, password);
   } catch (error) {
-    console.error("Login error:", error);
-    // Return a generic error message to avoid leaking sensitive information
-    // You can also return specific error messages based on the error type if needed
-    console.error("Error during login:", error);
-    // Return a user-friendly error message
-    // This can be customized based on your application's error handling strategy
     return { error: "Erro ao fazer login" };
   }
 }
