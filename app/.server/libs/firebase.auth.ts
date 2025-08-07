@@ -32,7 +32,13 @@ export class FirebaseAuthenticationImpl implements IAuthentication {
       console.log("login success", response);
       return { success: true };
     } catch (error: unknown | AuthError) {
-      return { success: false, error: (error as AuthError).message };
+      console.error("Login error:", error);
+
+      if ((error as AuthError)?.code === "auth/invalid-credential") {
+        return { success: false, error: "Email ou senha inválidos" };
+      }
+
+      return { success: false, error: "Erro ao processar login" };
     }
   }
 
