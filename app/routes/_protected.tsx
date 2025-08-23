@@ -1,8 +1,11 @@
 import type { LoaderFunctionArgs } from "react-router";
 import { Outlet, redirect, useLoaderData } from "react-router";
 import { getUserSession } from "@/.server/session";
-import { Header } from "@/components/Header";
+
 import type { User } from "@/.server/repositories/users-repository";
+
+import Sidebar from "@/components/ui/sidebar";
+
 export async function loader({ request }: LoaderFunctionArgs) {
   const sessionUser = await getUserSession(request);
   if (!sessionUser) return redirect("/login");
@@ -10,7 +13,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const user: User = {
     id: sessionUser.id,
     email: sessionUser.email,
-    displayName: "Teste",
+    displayName: "Bruna Silva",
     photoURL: undefined,
     createdAt: new Date().toISOString(),
     lastLoginAt: undefined,
@@ -22,33 +25,19 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function ProtectedLayout() {
   const { user } = useLoaderData<typeof loader>();
-
   return (
-    <div className="flex flex-col h-screen">
-      <Header user={user} />
-      <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar lateral */}
-        <aside className="w-64 bg-gray-100 dark:bg-gray-900 p-4 hidden md:block">
-          <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-            <li>
-              <a href="/home" className="hover:underline">
-                Início
-              </a>
-            </li>
-            <li>
-              <a href="/notes" className="hover:underline">
-                Notas
-              </a>
-            </li>
-            <li>
-              <a href="/voluntarios" className="hover:underline">
-                Voluntários
-              </a>
-            </li>
-          </ul>
-        </aside>
-        {/* Conteúdo principal das páginas */}
-        <main className="flex-1 p-4 overflow-y-auto dark:text-white">
+    <div className="flex h-screen bg-background">
+      {/* Sidebar */}
+      <Sidebar />
+
+      {/* Main Content */}
+      <div className="flex flex-col flex-1">
+        <header className="flex items-center justify-between p-4 border-b border-muted">
+          <h1 className="text-lg font-semibold">Dashboard</h1>
+        </header>
+
+        {/* Main Content Area */}
+        <main className="flex-1 overflow-auto p-6">
           <Outlet />
         </main>
       </div>
