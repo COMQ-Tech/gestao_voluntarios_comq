@@ -50,7 +50,9 @@ export class FirebaseAuthenticationImpl implements IAuthentication {
     return !!this.auth.currentUser;
   }
 
-  async getUser(): Promise<{ id: string; email: string } | null> {
+  async getUser(): Promise<{
+    displayName: string; id: string; email: string 
+} | null> {
     const user = this.auth.currentUser;
     return user ? { id: user.uid, email: user.email || "" } : null;
   }
