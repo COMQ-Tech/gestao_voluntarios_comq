@@ -1,5 +1,5 @@
 import { Form, redirect, useActionData, useNavigation } from "react-router";
-import { getUserSession, loginWithEmailAndPassword } from "~/.server/session";
+import { getUserSession, loginWithEmailAndPassword } from "@/.server/session";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
