@@ -12,13 +12,10 @@ export default [
   // Admin routes
   route("admin", "routes/admin/_admin-layout.tsx", [
     index("routes/admin/dashboard.tsx"),
-    route("users", "routes/admin/users.tsx"),
-    route("settings", "routes/admin/settings.tsx"),
   ]),
 
   // Volunteer routes (default protected area)
   route("volunteer", "routes/volunteer/_volunteer-layout.tsx", [
     index("routes/volunteer/dashboard.tsx"),
-    route("profile", "routes/volunteer/profile.tsx"),
   ]),
 ] satisfies RouteConfig;
