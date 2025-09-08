@@ -8,7 +8,7 @@
     "dev:local": "env ENV=local react-router dev",
     "dev:local:win": "set ENV=local && react-router dev",
     "dev:staging": "env ENV=staging react-router dev",
-    "dev:staging:win": "set ENV=staging react-router dev",
+    "dev:staging:win": "set ENV=staging && react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
     "seed:admin": "tsx app/.server/seeds/seed-admin-user.ts"
@@ -19,10 +19,11 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@react-router/node": "^7.5.3",
     "@react-router/serve": "^7.5.3",
+    "bcrypt": "6.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "firebase": "^11.7.1",
-    "firebase-admin": "^13.3.0",
+    "firebase": "12.2.1",
+    "firebase-admin": "13.5.0",
     "isbot": "^5.1.27",
     "lucide-react": "^0.525.0",
     "react": "^19.1.0",
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@react-router/dev": "^7.5.3",
     "@tailwindcss/vite": "^4.1.4",
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
@@ -43,5 +45,10 @@
     "typescript": "^5.8.3",
     "vite": "^6.3.3",
     "vite-tsconfig-paths": "^5.1.4"
+  },
+  "overrides": {
+    "color-convert": "2.0.1",
+    "color-name": "1.1.4",
+    "debug": "4.3.7"
   }
 }
