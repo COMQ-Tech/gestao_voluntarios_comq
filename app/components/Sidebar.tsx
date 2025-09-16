@@ -7,16 +7,18 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-const items = [
-    { title: "Dashboard", icon: LayoutDashboard, url: "/dashboard" },
-    { title: "Voluntários", icon: Users, url: "/inbox" },
-    { title: "Projetos", icon: FolderKanban, url: "/calendar" },
-    { title: "Banco de Horas", icon: Clock, url: "/search" },
-    { title: "Certificados", icon: FileBadge, url: "/settings" },
-    { title: "Relatórios", icon: FileText, url: "/settings" },
-];
 
-const Sidebar: FC = () => {
+export type SidebarItem = {
+    title: string;
+    icon: React.ElementType;
+    url: string;
+};
+
+interface SidebarProps {
+    items: SidebarItem[];
+}
+
+const Sidebar: FC<SidebarProps> = ({items}) => {
     return (
         <aside className="w-64 bg-gray-100 dark:bg-gray-900 p-4 hidden md:block">
             <div className="space-y-6">

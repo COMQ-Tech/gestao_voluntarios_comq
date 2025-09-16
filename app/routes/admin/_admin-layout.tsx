@@ -1,7 +1,7 @@
 import type { LoaderFunctionArgs } from "react-router";
 import { Outlet, useLoaderData, NavLink } from "react-router";
 import { requireRole } from "@/.server/auth/guards";
-import Sidebar from "@/components/ui/sidebar";
+import Sidebar from "@/components/Sidebar";
 import { LayoutDashboard, Users } from "lucide-react";
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -21,7 +21,7 @@ export default function AdminLayout() {
   return (
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
-      <Sidebar />
+      <Sidebar items={items} />
 
       {/* Main Content */}
       <div className="flex flex-col flex-1">
