@@ -7,17 +7,26 @@ async function seedAdminUser() {
 
   if (!email || !password) {
     console.error(
-      "ADMIN_EMAIL and ADMIN_PASSWORD must be set in environment variables."
+      "ADMIN_EMAIL and ADMIN_PASSWORD must be set in environment variables.",
     );
     process.exit(1);
   }
 
   try {
-    const userExists = await FirebaseAdmin.auth().getUserByEmail(email);
+    console.log("Seeding admin user...");
+    const userExists = await FirebaseAdmin.auth()
+      .getUserByEmail(email)
+      .catch((reason) => {
+        if (reason.errorInfo.code === "auth/user-not-found") {
+          return false;
+        }
+
+        throw new Error(reason.errorInfo.message);
+      });
 
     if (!!userExists) {
       console.log(
-        `Admin user already exists. \n ${JSON.stringify(userExists)}`
+        `Admin user already exists. \n ${JSON.stringify(userExists)}`,
       );
       throw new Error("Admin user already exists.");
     }
@@ -29,8 +38,10 @@ async function seedAdminUser() {
       displayName: "COMQ Admin",
     });
 
+    console.log(`Admin user created: ${newAdmin.uid}`);
+
     await FirebaseAdmin.auth().setCustomUserClaims(newAdmin.uid, {
-      role: "admin",
+      roles: ["admin"],
     });
 
     console.log(`Admin user created: ${newAdmin}`);

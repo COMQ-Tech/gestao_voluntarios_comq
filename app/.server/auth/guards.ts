@@ -1,7 +1,6 @@
 import { redirect } from "react-router";
 import { getUserSession } from "../session";
-
-export type UserRole = "admin" | "volunteer" | "coordinator" | "viewer";
+import type { UserRole } from "../authentication";
 
 export async function requireAuth(request: Request) {
   const user = await getUserSession(request);
@@ -16,11 +15,15 @@ export async function requireRole(request: Request, allowedRoles: UserRole[]) {
 
   // TODO: For now, we'll use the hardcoded role from the user object
   // In a real app, this would come from your database
-  const userRole = (user as any).role || "volunteer";
+  const userRoles = user.roles || [];
 
-  if (!allowedRoles.includes(userRole)) {
+  const userHasAllowedRole = userRoles.some((role) =>
+    allowedRoles.includes(role),
+  );
+
+  if (!userHasAllowedRole) {
     throw redirect("/unauthorized");
   }
 
-  return { ...user, role: userRole };
+  return { ...user, roles: userRoles };
 }

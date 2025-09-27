@@ -26,7 +26,7 @@ export async function createUserSession(userId: string, redirectTo: string) {
 
 export async function getUserSession(request: Request) {
   const session = await sessionStorage.getSession(
-    request.headers.get("Cookie")
+    request.headers.get("Cookie"),
   );
   const userId = session.get("userId");
 
@@ -37,7 +37,7 @@ export async function getUserSession(request: Request) {
 
 export async function loginWithEmailAndPassword(
   email: string,
-  password: string
+  password: string,
 ) {
   const result = await Authentication.login(email, password);
 
@@ -57,7 +57,7 @@ export async function loginWithEmailAndPassword(
 
 export async function logout(request: Request) {
   const session = await sessionStorage.getSession(
-    request.headers.get("Cookie")
+    request.headers.get("Cookie"),
   );
 
   await Authentication.logout();
