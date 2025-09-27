@@ -6,19 +6,8 @@ import Sidebar, { type SidebarItem } from "@/components/Sidebar";
 import { LayoutDashboard, Clock, FileBadge } from "lucide-react";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  // Requer que o usuário tenha role volunteer, coordinator ou viewer
-  const sessionUser = await requireRole(request, ["volunteer", "coordinator", "viewer"]);
-  
-  const user: User = {
-    id: sessionUser.id,
-    email: sessionUser.email,
-    displayName: "Usuário Voluntário", // TODO: Pegar do banco de dados
-    photoURL: undefined,
-    createdAt: new Date().toISOString(),
-    lastLoginAt: undefined,
-    role: sessionUser.role,
-  };
-
+  // Requer que o usuário tenha role volunteer
+  const user = await requireRole(request, ["volunteer"]);
   return { user };
 }
 
@@ -32,7 +21,7 @@ export default function VolunteerLayout() {
   return (
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
-      <Sidebar items={items} />
+      <Sidebar user={user} items={items} />
 
       {/* Main Content */}
       <div className="flex flex-col flex-1">

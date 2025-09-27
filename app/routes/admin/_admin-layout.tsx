@@ -15,13 +15,13 @@ export default function AdminLayout() {
   // TODO: Futuramente vamos passar os itens para o sidebar
   const items = [
     { title: "Dashboard", icon: LayoutDashboard, url: "/dashboard" },
-    { title: "Voluntários", icon: Users, url: "/inbox" },
-    { title: "Usuários", icon: Users, url: "/" },
+    { title: "Voluntários", icon: Users, url: "/volunteer" },
+    { title: "Usuários", icon: Users, url: "/users" },
   ];
   return (
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
-      <Sidebar items={items} />
+      <Sidebar user={{ ...user, displayName: "Admin" }} items={items} />
 
       {/* Main Content */}
       <div className="flex flex-col flex-1">

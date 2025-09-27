@@ -7,7 +7,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useSubmit } from "react-router";
+import { NavLink, useSubmit } from "react-router";
+import type { AuthUser } from "@/.server/authentication";
 
 export type SidebarItem = {
   title: string;
@@ -16,10 +17,11 @@ export type SidebarItem = {
 };
 
 interface SidebarProps {
+  user: AuthUser;
   items: SidebarItem[];
 }
 
-const Sidebar: FC<SidebarProps> = ({ items }) => {
+const Sidebar: FC<SidebarProps> = ({ user, items }) => {
   const submit = useSubmit();
 
   const handleLogout = () => {
@@ -41,21 +43,23 @@ const Sidebar: FC<SidebarProps> = ({ items }) => {
           </div>
 
           <div className="text-sm text-gray-700 dark:text-gray-300">
-            <p className="font-semibold">Bruna Silva</p>
-            <p className="text-xs">test@mail.com</p>
+            <p className="font-semibold">{user.displayName}</p>
+            <p className="text-xs">{user.email}</p>
           </div>
         </div>
         {/* Menu de navegação*/}
         <ul className="space-y-1 text-sm text-gray-700 dark:text-gray-300 pl-0">
           {items.map((item) => (
             <li key={item.title} className="w-full">
-              <Button
-                variant="link"
-                className="w-full justify-start hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer pl-0 pr-4 py-2"
-              >
-                <item.icon className="mr-3 ml-1" />
-                {item.title}
-              </Button>
+              <NavLink to={item.url}>
+                <Button
+                  variant="link"
+                  className="w-full justify-start hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer pl-0 pr-4 py-2"
+                >
+                  <item.icon className="mr-3 ml-1" />
+                  {item.title}
+                </Button>
+              </NavLink>
             </li>
           ))}
         </ul>
