@@ -1,4 +1,4 @@
-import type { IAuthentication } from "../authentication";
+import type { AuthUser, IAuthentication } from "../authentication";
 
 export class LocalDBAuthenticationImpl implements IAuthentication {
   private users: Map<string, { id: string; email: string; password: string }>;
@@ -9,10 +9,10 @@ export class LocalDBAuthenticationImpl implements IAuthentication {
 
   async login(
     email: string,
-    password: string
+    password: string,
   ): Promise<{ success: boolean; error?: string }> {
     const user = Array.from(this.users.values()).find(
-      (u) => u.email === email && u.password === password
+      (u) => u.email === email && u.password === password,
     );
     if (user) {
       return { success: true };
@@ -29,14 +29,14 @@ export class LocalDBAuthenticationImpl implements IAuthentication {
     return false;
   }
 
-  async getUser(): Promise<{ id: string; email: string } | null> {
+  getUser(): AuthUser | null {
     // No user management in this mock implementation
     return null;
   }
 
   async register(
     email: string,
-    password: string
+    password: string,
   ): Promise<{ success: boolean; error?: string }> {
     if (this.users.has(email)) {
       return { success: false, error: "User already exists" };
@@ -47,7 +47,7 @@ export class LocalDBAuthenticationImpl implements IAuthentication {
   }
 
   async resetPassword(
-    email: string
+    email: string,
   ): Promise<{ success: boolean; error?: string }> {
     if (!this.users.has(email)) {
       return { success: false, error: "User not found" };

@@ -8,11 +8,12 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { getApp } from "firebase/app";
-import type { IAuthentication } from "../authentication";
+import type { AuthUser, IAuthentication, UserRole } from "../authentication";
 import { FirebaseApplication } from "./firebase";
 
 export class FirebaseAuthenticationImpl implements IAuthentication {
   private auth: FirebaseAuth;
+  private currentUser: AuthUser | null = null;
 
   constructor() {
     this.auth = getAuth(FirebaseApplication);
@@ -20,16 +21,38 @@ export class FirebaseAuthenticationImpl implements IAuthentication {
 
   async login(
     email: string,
-    password: string
+    password: string,
   ): Promise<{ success: boolean; error?: string }> {
     try {
       const response = await signInWithEmailAndPassword(
         this.auth,
         email,
-        password
+        password,
       );
 
-      console.log("login success", response);
+      const user = this.auth.currentUser;
+
+      console.log("=== current user === ", user?.uid);
+
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+      // Get the ID token to access custom claims
+      const idTokenResult = await user.getIdTokenResult();
+
+      console.log("=== idTokenResult === ", idTokenResult);
+
+      this.currentUser = {
+        id: response.user.uid,
+        email: response.user.email || "",
+        emailVerified: response.user.emailVerified,
+        createdAt: response.user.metadata.creationTime || "",
+        lastLoginAt: response.user.metadata.lastSignInTime || "",
+        roles: (idTokenResult.claims.roles as UserRole[]) || [],
+      };
+
+      console.log("login success", response.user.uid);
       return { success: true };
     } catch (error: unknown | AuthError) {
       console.error("Login error:", error);
@@ -50,16 +73,13 @@ export class FirebaseAuthenticationImpl implements IAuthentication {
     return !!this.auth.currentUser;
   }
 
-  async getUser(): Promise<{
-    displayName: string; id: string; email: string 
-} | null> {
-    const user = this.auth.currentUser;
-    return user ? { id: user.uid, email: user.email || "" } : null;
+  getUser(): AuthUser | null {
+    return this.currentUser;
   }
 
   async register(
     email: string,
-    password: string
+    password: string,
   ): Promise<{ success: boolean; error?: string }> {
     try {
       await createUserWithEmailAndPassword(this.auth, email, password);
@@ -70,7 +90,7 @@ export class FirebaseAuthenticationImpl implements IAuthentication {
   }
 
   async resetPassword(
-    email: string
+    email: string,
   ): Promise<{ success: boolean; error?: string }> {
     try {
       await sendPasswordResetEmail(this.auth, email);
