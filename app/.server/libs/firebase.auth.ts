@@ -7,9 +7,9 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { getApp } from "firebase/app";
-import type { AuthUser, IAuthentication, UserRole } from "../authentication";
+import type { AuthUser, IAuthentication } from "../authentication";
 import { FirebaseApplication } from "./firebase";
+import type { UserRole } from "@/types/user";
 
 export class FirebaseAuthenticationImpl implements IAuthentication {
   private auth: FirebaseAuth;

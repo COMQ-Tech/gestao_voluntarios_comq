@@ -1,7 +1,8 @@
 import { LocalDBAuthenticationImpl } from "./libs/local.auth";
 import { FirebaseAuthenticationImpl } from "./libs/firebase.auth";
+import type { UserRole } from "@/types/user";
 
-export type UserRole = "admin" | "volunteer" | "leader";
+
 
 export type AuthUser = {
   id: string;
